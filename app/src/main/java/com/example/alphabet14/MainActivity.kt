@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.io.FileNotFoundException
+import java.lang.NullPointerException
 
 //import sun.net.ext.ExtendedSocketOptions.options
 
@@ -28,27 +30,55 @@ class MainActivity : AppCompatActivity() {
         //    new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE},
           //  1);
 
-        ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+       // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        checkPermission()
 
 
 
         val imageView: ImageView = findViewById(R.id.imageView)
-        var bit: Bitmap = BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg")
-        val imageInSD = "/sdcard/DCIM/yuno.jpg"
+        var bit: Bitmap //= BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg") // To store image in storage
+        val imageInSD = "/storage/emulated/0/Pictures/alphabet/Slide02.gif" //Image Path
 
         try {
 
-            bit= BitmapFactory.decodeFile(imageInSD)
-        } catch (e: OutOfMemoryError) {
+                try {
+                    bit = BitmapFactory.decodeFile(imageInSD) //Gets image from path
+
+                    imageView.setImageBitmap(bit) // sets Image view
+                } catch (e: Exception) {
+                    when (e) {
+                        is FileNotFoundException ->{
+                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
+                            .show()}
+
+                        is NullPointerException ->{
+                            Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                }
+
+
+        } catch (e: OutOfMemoryError) { // If image is too big for image view
             try {
                 val options = BitmapFactory.Options()
-                options.inSampleSize = 2
+                options.inSampleSize = 2 // Halfs the image
                 bit= BitmapFactory.decodeFile(imageInSD, options)
+                imageView.setImageBitmap(bit)
             } catch (e: Exception) {
-                Log.e(",","",e)
+                when (e) {
+                    is FileNotFoundException ->{
+                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
+                            .show()}
+
+                    is NullPointerException ->{
+                        Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             }
         }
-        imageView.setImageBitmap(bit)
+
 
       //  val bMap:Bitmap = BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg")
       //  val scabit: Bitmap = Bitmap.createScaledBitmap(bMap,  50 ,50, true)
@@ -72,17 +102,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Function to check and request permission.
-    private fun checkPermission(permission: String, requestCode: Int) {
-       // if (ContextCompat.checkSelfPermission(this@MainActivity, permission) == PackageManager.PERMISSION_DENIED) {
+    private fun checkPermission() {
+        // if (ContextCompat.checkSelfPermission(this@MainActivity, permission) == PackageManager.PERMISSION_DENIED) {
+        if (ContextCompat.checkSelfPermission(
+                this@MainActivity,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_DENIED
+        ) {
             // Requesting the permission
-            ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
-     //   } else {
-           // Toast.makeText(this@MainActivity, "Permission already granted", Toast.LENGTH_SHORT).show()
+            // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
+            ActivityCompat.requestPermissions(
+                this@MainActivity,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                1
+            )
+        } else {
+            Toast.makeText(this@MainActivity, "Permission already granted", Toast.LENGTH_SHORT)
+                .show()
         }
 
+        // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        //if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
 
-
-
+    }
 
 
 }
