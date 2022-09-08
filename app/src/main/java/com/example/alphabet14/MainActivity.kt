@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import java.io.FileNotFoundException
 import java.lang.NullPointerException
 
-//import sun.net.ext.ExtendedSocketOptions.options
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,76 +26,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      //  ActivityCompat.requestPermissions(MainActivity.this,
-        //    new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE},
-          //  1);
-
-       // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        checkPermission()
-
-
-
-        val imageView: ImageView = findViewById(R.id.imageView)
-        var bit: Bitmap //= BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg") // To store image in storage
-        val imageInSD = "/storage/emulated/0/Pictures/alphabet/Slide02.gif" //Image Path
-
-        try {
-
-                try {
-                    bit = BitmapFactory.decodeFile(imageInSD) //Gets image from path
-
-                    imageView.setImageBitmap(bit) // sets Image view
-                } catch (e: Exception) {
-                    when (e) {
-                        is FileNotFoundException ->{
-                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
-                            .show()}
-
-                        is NullPointerException ->{
-                            Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                }
-
-
-        } catch (e: OutOfMemoryError) { // If image is too big for image view
-            try {
-                val options = BitmapFactory.Options()
-                options.inSampleSize = 2 // Halfs the image
-                bit= BitmapFactory.decodeFile(imageInSD, options)
-                imageView.setImageBitmap(bit)
-            } catch (e: Exception) {
-                when (e) {
-                    is FileNotFoundException ->{
-                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
-                            .show()}
-
-                    is NullPointerException ->{
-                        Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
-        }
-
-
-      //  val bMap:Bitmap = BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg")
-      //  val scabit: Bitmap = Bitmap.createScaledBitmap(bMap,  50 ,50, true)
-      //  imageView.setImageBitmap(scabit)
-
-
+        checkPermission() // Makes sure to get permission
 
         switchActivity()
     }
 
     fun switchActivity(){
 
-        buttonA =  findViewById(R.id.buttonA)
+        buttonA =  findViewById(R.id.button01)
 
         buttonA.setOnClickListener{
+            var butoonText:String = buttonA.text.toString()
             val intent = Intent(this,LetterActivity::class.java)
-          //  intent.putExtra("SHOW_WELCOME", true)
+            intent.putExtra("Button_number",butoonText)
             startActivity(intent)
           //  finish()
         }

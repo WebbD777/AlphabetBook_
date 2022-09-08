@@ -9,22 +9,13 @@
 
 
     <Button
-        android:id="@+id/buttonA"
+        android:id="@+id/button01"
         android:background="@color/teal_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ButtonA"
+        android:text="A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="381dp"
-        android:layout_height="654dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonA"
-        app:srcCompat="@drawable/ic_launcher_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>
