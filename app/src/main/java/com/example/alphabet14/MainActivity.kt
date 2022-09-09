@@ -7,11 +7,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
+import java.lang.NullPointerException
 
 
 //import sun.net.ext.ExtendedSocketOptions.options
@@ -42,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun save(context:Context){
-        var bm = BitmapFactory.decodeResource(resources, R.drawable.alphabetbook)
+        var bm = BitmapFactory.decodeResource(resources, R.drawable.slide02)
         //val dirPath = context.filesDir.absolutePath
         val dirPath ="/storage/emulated/0/DCIM"// Environment.DIRECTORY_DCIM
         val savPath = File(dirPath, "/alphabet")
         savPath.mkdir()
 
-        val outFile = File(savPath, "slide.gif")
+        val outFile = File(savPath, "slide7.gif")
 
 
        // var file = File(dirPath, "alphabetbook.png")
@@ -57,24 +59,25 @@ class MainActivity : AppCompatActivity() {
         outStream.flush()
         outStream.close()
 
-        var biy = load(outFile, savPath.absolutePath.toString())
+      //  var biy = load(outFile, savPath.absolutePath.toString())
+        var biy:Bitmap = BitmapFactory.decodeFile(outFile.absolutePath.toString())
         imageView.setImageBitmap(biy)
 
     }
 
-    fun load(file:File, dir:String):Bitmap {
+    fun load(file:File, dir:String): Bitmap {
 
 
 
-        var fileInputStream:FileInputStream
-        var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.alphabetbook)
+       // var fileInputStream:FileInputStream
+        var bitmap:Bitmap= BitmapFactory.decodeResource(resources, R.drawable.alphabetbook)
 
         try{
-            fileInputStream = context.openFileInput(file.absolutePath.toString());
+            var fileInputStream = context.openFileInput(file.absolutePath.toString());
             bitmap = BitmapFactory.decodeStream(fileInputStream);
             fileInputStream.close();
-        } catch(e:Exception) {
-           // e.printStackTrace();
+        } catch(e:FileNotFoundException) {
+          Log.e("MainActivity",e.printStackTrace().toString())
             Toast.makeText(this@MainActivity, "Null Bitmap", Toast.LENGTH_SHORT).show()
 
         }
