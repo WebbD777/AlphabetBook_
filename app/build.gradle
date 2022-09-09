@@ -6,7 +6,14 @@ plugins {
 android {
     compileSdk 32
 
-    defaultConfig {
+   /* buildTypes { //Removes unsused resources
+        release {
+            minifyEnabled true //Important step
+            shrinkResources true
+        }*/
+
+
+        defaultConfig {
         applicationId "com.example.alphabet14"
         minSdk 29
         targetSdk 32

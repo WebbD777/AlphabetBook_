@@ -1,92 +1,85 @@
 package com.example.alphabet14
 
-import android.Manifest
+//import android.R
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
+import android.os.Environment
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import java.io.FileNotFoundException
-import java.lang.NullPointerException
+import java.io.*
+
 
 //import sun.net.ext.ExtendedSocketOptions.options
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var buttonA: Button
+    private val img:String = "Slide01.gif"
+    private lateinit var dir:String
+    private lateinit var context: Context
+    private  lateinit var bit:Bitmap
+    lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-      //  ActivityCompat.requestPermissions(MainActivity.this,
-        //    new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE},
-          //  1);
-
-       // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        checkPermission()
+        imageView  = findViewById(R.id.imageView)
 
 
-
-        val imageView: ImageView = findViewById(R.id.imageView)
-        var bit: Bitmap //= BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg") // To store image in storage
-        val imageInSD = "/storage/emulated/0/Pictures/alphabet/Slide02.gif" //Image Path
-
-        try {
-
-                try {
-                    bit = BitmapFactory.decodeFile(imageInSD) //Gets image from path
-
-                    imageView.setImageBitmap(bit) // sets Image view
-                } catch (e: Exception) {
-                    when (e) {
-                        is FileNotFoundException ->{
-                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
-                            .show()}
-
-                        is NullPointerException ->{
-                            Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                }
+        val context:Context = applicationContext
+       // imageView.setImageResource(R.drawable.alp)
 
 
-        } catch (e: OutOfMemoryError) { // If image is too big for image view
-            try {
-                val options = BitmapFactory.Options()
-                options.inSampleSize = 2 // Halfs the image
-                bit= BitmapFactory.decodeFile(imageInSD, options)
-                imageView.setImageBitmap(bit)
-            } catch (e: Exception) {
-                when (e) {
-                    is FileNotFoundException ->{
-                        Toast.makeText(this@MainActivity, "Letters Not Found", Toast.LENGTH_SHORT)
-                            .show()}
+        save(context)
 
-                    is NullPointerException ->{
-                        Toast.makeText(this@MainActivity, "Letters not found", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
+        //switchActivity()
+    }
+
+    fun save(context:Context){
+        var bm = BitmapFactory.decodeResource(resources, R.drawable.alphabetbook)
+        //val dirPath = context.filesDir.absolutePath
+        val dirPath ="/storage/emulated/0/DCIM"// Environment.DIRECTORY_DCIM
+        val savPath = File(dirPath, "/alphabet")
+        savPath.mkdir()
+
+        val outFile = File(savPath, "slide.gif")
+
+
+       // var file = File(dirPath, "alphabetbook.png")
+        var outStream = FileOutputStream(outFile)
+        bm.compress(Bitmap.CompressFormat.PNG, 75, outStream)
+        outStream.flush()
+        outStream.close()
+
+        var biy = load(outFile, savPath.absolutePath.toString())
+        imageView.setImageBitmap(biy)
+
+    }
+
+    fun load(file:File, dir:String):Bitmap {
+
+
+
+        var fileInputStream:FileInputStream
+        var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.alphabetbook)
+
+        try{
+            fileInputStream = context.openFileInput(file.absolutePath.toString());
+            bitmap = BitmapFactory.decodeStream(fileInputStream);
+            fileInputStream.close();
+        } catch(e:Exception) {
+           // e.printStackTrace();
+            Toast.makeText(this@MainActivity, "Null Bitmap", Toast.LENGTH_SHORT).show()
+
         }
+        return bitmap
 
-
-      //  val bMap:Bitmap = BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg")
-      //  val scabit: Bitmap = Bitmap.createScaledBitmap(bMap,  50 ,50, true)
-      //  imageView.setImageBitmap(scabit)
-
-
-
-        switchActivity()
     }
 
     fun switchActivity(){
@@ -101,30 +94,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Function to check and request permission.
-    private fun checkPermission() {
-        // if (ContextCompat.checkSelfPermission(this@MainActivity, permission) == PackageManager.PERMISSION_DENIED) {
-        if (ContextCompat.checkSelfPermission(
-                this@MainActivity,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_DENIED
-        ) {
-            // Requesting the permission
-            // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
-            ActivityCompat.requestPermissions(
-                this@MainActivity,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                1
-            )
-        } else {
-            Toast.makeText(this@MainActivity, "Permission already granted", Toast.LENGTH_SHORT)
-                .show()
+    /*fun insertLetterStorage(filename:String, bit:Bitmap): Boolean{
+
+        return try {
+            openFileOutput("$filename.gif", MODE_PRIVATE).use { stream ->
+                 if (!bit.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
+                    throw IOException("Bitmap not saved")
+                 }
+            }
+            true
+        }catch (e:IOException){
+          //  Toast.makeText(Message, "Not saved, ")
+            e.printStackTrace()
+            false
         }
 
-        // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        //if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+    }*/
 
-    }
+    /*fun saveImage(){
+        var dirImg = context.getDir(img, Context.MODE_PRIVATE)
+       // var fileImg : File = File(dirImg, img)
+        try {
+            var fos:FileOutputStream = context.openFileOutput(img, MODE_PRIVATE)
+            bit.compress(Bitmap.CompressFormat.JPEG, 100, fos)
+            Toast.makeText(this, "Success!!!!",
+                Toast.LENGTH_LONG).show();
+        }catch (e:IOException){
+            e.printStackTrace()
+        }
+    }*/
+
+
 
 
 }
