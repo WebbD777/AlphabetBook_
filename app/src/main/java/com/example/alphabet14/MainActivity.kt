@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -19,23 +20,27 @@ import java.lang.NullPointerException
 //import sun.net.ext.ExtendedSocketOptions.options
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var buttonA: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        buttonA =  findViewById(R.id.buttonA)
+
+        buttonA.setOnClickListener(this)
+
       //  ActivityCompat.requestPermissions(MainActivity.this,
         //    new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE},
           //  1);
 
        // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        checkPermission()
+       // checkPermission()
 
 
 
-        val imageView: ImageView = findViewById(R.id.imageView)
+        /*val imageView: ImageView = findViewById(R.id.imageView)
         var bit: Bitmap //= BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg") // To store image in storage
         val imageInSD = "/storage/emulated/0/Pictures/alphabet/Slide02.gif" //Image Path
 
@@ -77,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
 
 
       //  val bMap:Bitmap = BitmapFactory.decodeFile("/sdcard/DCIM/yuno.jpg")
@@ -86,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        switchActivity()
+      //  switchActivity()
     }
 
     fun switchActivity(){
@@ -126,5 +131,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onClick(view: View?)
+    {
+        when ( view!!.id)
+        {
+            R.id.buttonA->
+            {
+                val intent = Intent(this,LetterActivity::class.java)
+                 // intent.putExtra("key", true)
+                startActivity(intent)
+            }
+            /*R.id.button2->
+            {
+                myToast("Button Two Clicked")
+            }
+            R.id.button3->
+            {
+                myToast("Button Three Clicked")
+            }
+            R.id.button4->
+            {
+                myToast("Button Four Clicked")
+            }*/
+        }
+
+    }
 
 }

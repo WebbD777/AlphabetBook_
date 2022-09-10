@@ -15,8 +15,8 @@ class LetterActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter)
 
-        val imageView: ImageView = findViewById(R.id.slideA)
-        DisplayLetter(imageView)
+        //val imageView: ImageView = findViewById(R.id.slideA)
+       // DisplayLetter(imageView)
 
     }
 
