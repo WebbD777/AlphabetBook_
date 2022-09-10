@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_200"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="-4dp">
 
 
     <Button
@@ -120,7 +122,7 @@
         android:layout_marginTop="16dp"
         android:text="K"
         app:layout_constraintEnd_toStartOf="@+id/buttonL"
-        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/buttonJ"
         app:layout_constraintTop_toBottomOf="@+id/buttonH" />
 
@@ -169,10 +171,10 @@
         android:id="@+id/buttonP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="P"
         app:layout_constraintEnd_toStartOf="@+id/buttonQ"
-        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonM" />
 
@@ -180,20 +182,20 @@
         android:id="@+id/buttonQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="28dp"
         android:text="Q"
-        app:layout_constraintTop_toBottomOf="@+id/buttonN"
-        tools:layout_editor_absoluteX="162dp" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonR"
+        app:layout_constraintTop_toBottomOf="@+id/buttonN" />
 
     <Button
         android:id="@+id/buttonR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
         android:text="R"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toEndOf="@+id/buttonQ"
         app:layout_constraintTop_toBottomOf="@+id/buttonO" />
 
     <Button
@@ -201,7 +203,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="S"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonP" />
