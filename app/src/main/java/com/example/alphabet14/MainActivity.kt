@@ -1,6 +1,7 @@
 package com.example.alphabet14
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,7 +15,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.io.File
 import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.lang.NullPointerException
 
 //import sun.net.ext.ExtendedSocketOptions.options
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         buttonCreate()
 
         resIntArray = loopRes()
+        save(applicationContext, resIntArray)
 
       //  switchActivity()
     }
@@ -373,6 +377,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+
+
     fun loopRes():IntArray{
 
         var resArrID = IntArray(26)
@@ -394,6 +400,38 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         }
         return resArrID
+    }
+
+    fun save(context: Context, idList:IntArray){
+
+        var count: Int = 1
+
+        for (i in idList) {
+
+            //   var bm = BitmapFactory.decodeResource(resources, R.drawable.slide03)
+            var bm = BitmapFactory.decodeResource(resources, i)
+            //val dirPath = context.filesDir.absolutePath
+            val dirPath = presenter.getPath()//"/storage/emulated/0/DCIM"// Environment.DIRECTORY_DCIM
+            val savPath = File(dirPath, "/alphabet")
+
+            if(!savPath.exists()){
+            savPath.mkdir()}
+
+            val outFile = File(savPath, "slide"+count+".gif")
+            count++
+
+            // var file = File(dirPath, "alphabetbook.png")
+            var outStream = FileOutputStream(outFile)
+            bm.compress(Bitmap.CompressFormat.PNG, 75, outStream)
+            outStream.flush()
+            outStream.close()
+
+        }
+        // /storage/emulated/0/DCIM/alphabet/slide"+count+".gif
+        //  var biy = load(outFile, savPath.absolutePath.toString())
+        // var biy:Bitmap = BitmapFactory.decodeFile(outFile.absolutePath.toString())
+        // imageView.setImageBitmap(biy)
+
     }
 
     fun buttonCreate(){

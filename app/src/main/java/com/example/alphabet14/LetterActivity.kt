@@ -1,6 +1,7 @@
 package com.example.alphabet14
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -32,7 +33,8 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
             R.id.buttonA -> {
                 //resInt1=0
                 presenter.setImageIn(0)
-                presenter.setImageLetter(imageView, applicationContext)
+              //  presenter.setImageLetter(imageView, applicationContext)
+                presenter.setLetterImageView(imageView)
               //  var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
               //  imageView.setImageBitmap(bm)
 
@@ -42,7 +44,8 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
               //  var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
               //  imageView.setImageBitmap(bm)
                 presenter.setImageIn(25)
-                presenter.setImageLetter(imageView, applicationContext)
+                //presenter.setImageLetter(imageView, applicationContext)
+                presenter.setLetterImageView(imageView)
             }
             R.id.buttonOver -> {
                 val intent = Intent(this@LetterActivity,MainActivity::class.java)
@@ -58,11 +61,13 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
                 if (Model.getIndex()!=25){
                     presenter.setImageIn(Model.getIndex()+1)
-                    presenter.setImageLetter(imageView, applicationContext)
+                   // presenter.setImageLetter(imageView, applicationContext)
+                    presenter.setLetterImageView(imageView)
                 }
                 else{
                     presenter.setImageIn(0)
-                    presenter.setImageLetter(imageView, applicationContext)
+                  //  presenter.setImageLetter(imageView, applicationContext)
+                    presenter.setLetterImageView(imageView)
                 }
             }
             R.id.buttonPrevious -> {
@@ -78,11 +83,13 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
                 }*/
                 if (Model.getIndex()!=0){
                     presenter.setImageIn(Model.getIndex()-1)
-                    presenter.setImageLetter(imageView, applicationContext)
+                   // presenter.setImageLetter(imageView, applicationContext)
+                    presenter.setLetterImageView(imageView)
                 }
                 else{
                     presenter.setImageIn(25)
-                    presenter.setImageLetter(imageView, applicationContext)
+                  //  presenter.setImageLetter(imageView, applicationContext)
+                    presenter.setLetterImageView(imageView)
                 }
             }
         }
@@ -108,10 +115,14 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
 
         //val imageView: ImageView = findViewById(resInt)
-        var bm = BitmapFactory.decodeResource(resources, Model.getArr().get(Model.getIndex()) ?:0 )
-        imageView.setImageBitmap(bm)
+     //   var bm = BitmapFactory.decodeResource(resources, Model.getArr().get(Model.getIndex()) ?:0 )
+       // imageView.setImageBitmap(bm)
         //val imageView: ImageView = findViewById(resInt)
         //DisplayLetter(imageView)
+       // var slideNum:Int = Model.getIndex()+1
+       //  var biy: Bitmap = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide"+slideNum+".gif")
+       //  imageView.setImageBitmap(biy)
+        presenter.setLetterImageView(imageView)
 
     }
 

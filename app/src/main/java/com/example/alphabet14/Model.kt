@@ -12,6 +12,11 @@ class Model{
         private var count: Boolean = false
         private lateinit var intent: Intent
         private lateinit var context: Context
+        private var storagePath = "/storage/emulated/0/DCIM"
+
+        fun getPath():String{
+            return storagePath
+        }
 
         fun setIntent(intent: Intent){
             this.intent=intent
