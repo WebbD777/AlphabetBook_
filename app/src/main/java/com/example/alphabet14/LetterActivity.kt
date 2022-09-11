@@ -24,18 +24,25 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var imageView:ImageView
 
+    var presenter = Presenter()
+
     override fun onClick(view: View?) {
         when (view!!.id) {
 
             R.id.buttonA -> {
-                resInt1=0
-                var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
-                imageView.setImageBitmap(bm)
+                //resInt1=0
+                presenter.setImageIn(0)
+                presenter.setImageLetter(imageView, applicationContext)
+              //  var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
+              //  imageView.setImageBitmap(bm)
+
             }
             R.id.buttonZ -> {
-                resInt1=25
-                var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
-                imageView.setImageBitmap(bm)
+              //  resInt1=25
+              //  var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?:0 )
+              //  imageView.setImageBitmap(bm)
+                presenter.setImageIn(25)
+                presenter.setImageLetter(imageView, applicationContext)
             }
             R.id.buttonOver -> {
                 val intent = Intent(this@LetterActivity,MainActivity::class.java)
@@ -43,19 +50,23 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
                 finish()
             }
             R.id.buttonNext -> {
-                if (resInt1 != 25) {
+               /* if (resInt1 != 25) {
                     resInt1++
                     var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?: 0)
                     imageView.setImageBitmap(bm)
+                }*/
+
+                if (Model.getIndex()!=25){
+                    presenter.setImageIn(Model.getIndex()+1)
+                    presenter.setImageLetter(imageView, applicationContext)
                 }
                 else{
-                    resInt1=0
-                    var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?: 0)
-                    imageView.setImageBitmap(bm)
+                    presenter.setImageIn(0)
+                    presenter.setImageLetter(imageView, applicationContext)
                 }
             }
             R.id.buttonPrevious -> {
-                if (resInt1 != 0) {
+                /*if (resInt1 != 0) {
                     resInt1--
                     var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?: 0)
                     imageView.setImageBitmap(bm)
@@ -64,6 +75,14 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
                     resInt1=25
                     var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1) ?: 0)
                     imageView.setImageBitmap(bm)
+                }*/
+                if (Model.getIndex()!=0){
+                    presenter.setImageIn(Model.getIndex()-1)
+                    presenter.setImageLetter(imageView, applicationContext)
+                }
+                else{
+                    presenter.setImageIn(25)
+                    presenter.setImageLetter(imageView, applicationContext)
                 }
             }
         }
@@ -74,13 +93,12 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter)
-
        // val resInt = intent.getIntExtra("letter", 0)
        // var resArr = intent.getIntArrayExtra("array")
-        resArr1 = intent.getIntArrayExtra("array")!!
+     //   resArr1 = intent.getIntArrayExtra("array")!!
 
       //  var resInt = intent.getIntExtra("index", 0)
-        resInt1 = intent.getIntExtra("index", 0)
+      //  resInt1 = intent.getIntExtra("index", 0)
 
         imageView = findViewById(R.id.slideA)
 
@@ -90,7 +108,7 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
 
         //val imageView: ImageView = findViewById(resInt)
-        var bm = BitmapFactory.decodeResource(resources, resArr1?.get(resInt1!!) ?:0 )
+        var bm = BitmapFactory.decodeResource(resources, Model.getArr().get(Model.getIndex()) ?:0 )
         imageView.setImageBitmap(bm)
         //val imageView: ImageView = findViewById(resInt)
         //DisplayLetter(imageView)
