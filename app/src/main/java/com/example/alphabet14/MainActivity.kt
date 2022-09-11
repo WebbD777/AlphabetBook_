@@ -10,13 +10,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
-import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.lang.NullPointerException
 
@@ -24,6 +22,7 @@ import java.lang.NullPointerException
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
     private lateinit var buttonA: Button
     private lateinit var buttonB: Button
     private lateinit var buttonC: Button
@@ -56,15 +55,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var presenter = Presenter()
 
 
+  //  var t1 = storeImgs(applicationContext)
+
+   // var t1 = storeImgs(applicationContext, resIntArray)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        var t1L = loopResIds(applicationContext)
+     //   var t1L = loopResIds(applicationContext)
+        t1L.start()
+        presenter.getLoopThread(t1L)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         buttonCreate()
+      //  t1L.join()
+       // t1.start()
+        //t1.join()
 
-        resIntArray = loopRes()
-        save(applicationContext, resIntArray)
+        //resIntArray = loopRes()
 
+       // save(applicationContext)
+
+  //      var t1 = storeImgs(applicationContext)
+     //   t1.start()
+//
       //  switchActivity()
     }
 
@@ -108,8 +124,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onClick(view: View?)
-    {
+    {// t1.join()
         presenter.setImageArr(applicationContext)
+
+      //  t1.join()
+
 
         when ( view!!.id)
         {
@@ -402,7 +421,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return resArrID
     }
 
-    fun save(context: Context, idList:IntArray){
+    fun save(context: Context){
+
+        var idList = Model.getArr()
 
         var count: Int = 1
 

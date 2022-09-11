@@ -42,6 +42,10 @@ class Model{
             return rIdArray
         }
 
+        fun setArr(intArray: IntArray){
+            this.rIdArray=intArray
+        }
+
         fun setCount(){
             count = true
         }
