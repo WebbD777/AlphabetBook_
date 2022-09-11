@@ -160,164 +160,210 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonA->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                  intent.putExtra("letter", resIntArray[0])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 0)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonB->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[1])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 1)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonC->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[2])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 2)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonD->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[3])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 3)
                 startActivity(intent)
-            }
-            R.id.buttonA->
-            {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[4])
-                startActivity(intent)
+                finish()
             }
             R.id.buttonE->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[5])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 4)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonF->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[6])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 5)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonG->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[7])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 6)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonH->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[8])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 7)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonI->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[9])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 8)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonJ->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[10])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 9)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonK->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[11])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 10)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonL->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[12])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 11)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonM->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[13])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 12)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonN->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[14])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 13)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonO->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[15])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 14)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonP->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[16])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 15)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonQ->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[17])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 16)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonR->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[0])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 17)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonS->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[18])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 18)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonT->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[19])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 19)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonU->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[20])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 20)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonV->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[21])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 21)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonW->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[22])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 22)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonX->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[23])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 23)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonY->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[24])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 24)
                 startActivity(intent)
+                finish()
             }
             R.id.buttonZ->
             {
                 val intent = Intent(this@MainActivity,LetterActivity::class.java)
-                intent.putExtra("letter", resIntArray[25])
+                intent.putExtra("array", resIntArray)
+                intent.putExtra("index", 25)
                 startActivity(intent)
+                finish()
             }
         }
 
