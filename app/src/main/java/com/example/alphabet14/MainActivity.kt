@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var t1L = loopResIds(applicationContext)
+        var t1L = loopResIds1(applicationContext)
      //   var t1L = loopResIds(applicationContext)
         t1L.start()
         presenter.getLoopThread(t1L)

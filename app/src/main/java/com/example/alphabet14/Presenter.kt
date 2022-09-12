@@ -14,7 +14,7 @@ import java.io.FileOutputStream
 
 
 class Presenter {
-     var loadThread:loopResIds = loopResIds()// lateinit var storeImgs: storeImgs
+     var loadRes:loopResIds1 = loopResIds1()// lateinit var storeImgs: storeImgs
 
     fun setImageLetter(imageView:ImageView, context:Context){
 
@@ -34,8 +34,10 @@ class Presenter {
      //   var slideNum:Int = Model.getIndex()+1
      //   var biy: Bitmap = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide"+slideNum+".gif")
      //   imageView.setImageBitmap(biy)
-        joinLoopThread()
+     //   joinLoopThread()
        // joinStoreThread()
+        this.loadRes.join()
+
         var t1 = loadThread(imageView)
         t1.start()
         t1.join()
@@ -51,8 +53,9 @@ class Presenter {
         Model.setResIds(context)}
     }
 
-    fun getLoopThread(loadThread: loopResIds){
-        this.loadThread=loadThread
+    fun getLoopThread(loadThread: loopResIds1){
+
+        this.loadRes=loadThread
     }
 
     fun getStoreThread(storeImgs: storeImgs){
@@ -60,7 +63,8 @@ class Presenter {
     }
 
     fun joinLoopThread(){
-        this.loadThread.join()
+        if (this.loadRes.isAlive)
+        this.loadRes.join()
     }
 
     fun joinStoreThread(){
@@ -82,9 +86,19 @@ class loadThread:Thread{
     constructor()
 
     override fun run() {
-        var slideNum:Int = Model.getIndex()+1
-        var biy: Bitmap = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide"+slideNum+".gif")
-        imgView.setImageBitmap(biy)
+        try {
+            var slideNum: Int = Model.getIndex() + 1
+            var biy: Bitmap =
+                BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide" + slideNum + ".gif")
+            imgView.setImageBitmap(biy)
+        }
+        catch (e:Exception){
+            when(e){
+                is FileNotFoundException ->{
+                    Log.e("Exception", "File Not Found")
+                }
+            }
+        }
     }
 
 }
@@ -118,9 +132,11 @@ class loopResIds:Thread{
                 resArrID[i-1] = id
             }
 
-            Model.setArr(resArrID)
+
 
         }
+
+        Model.setArr(resArrID)
 
     }
 
@@ -129,12 +145,13 @@ class loopResIds:Thread{
 class loopResIds1:Thread{
 
     lateinit var context: Context
-   // lateinit var intArray: IntArray
+    // lateinit var intArray: IntArray
 
     constructor(context: Context){
         this.context=context
-      //  this.intArray=idList
+        //  this.intArray=idList
     }
+    constructor()
 
     override fun run() {
         var resArrID = IntArray(26)
@@ -154,9 +171,11 @@ class loopResIds1:Thread{
                 resArrID[i-1] = id
             }
 
-            Model.setArr(resArrID)
+
 
         }
+
+        Model.setArr(resArrID)
 
         var count: Int = 1
 
