@@ -19,6 +19,9 @@
             android:name=".LetterActivity"
             android:exported="false" />
         <activity
+            android:name=".OverviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

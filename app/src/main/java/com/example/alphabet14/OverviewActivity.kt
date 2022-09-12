@@ -1,70 +1,6 @@
 package com.example.alphabet14
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-
-class MainActivity : AppCompatActivity() {
-
-    var presenter = Presenter()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
-       // var sp: SharedPreferences = getPreferences(0)
-
-        var spEdit: SharedPreferences.Editor = sp.edit()
-
-        /*if(sp.getString("activity", "p").equals("OverviewActivity")){
-            Log.e("WWWWWW", sp.getString("myActivity", "p").toString())
-
-        }*/
-
-       Log.e("BUGGG", sp.getString("activity", "p").toString())
-
-        if (sp.getString("activity", "p").equals("LetterActivity")){
-            var st:String = sp.getString("activity", "p")!!
-        //    var stInt:Int = sp.getInt("letter", 0)
-            // sp.
-            Log.e("DOFFFFFFF", st)
-            val intent = Intent(this@MainActivity,Class.forName("com.example.alphabet14.${st}").kotlin.java)
-            // presenter.setIntent(intent)
-            // intent.putExtra("array", resIntArray)
-            // intent.putExtra("index", 7)
-            presenter.setImageIn(Model.getIndex())
-            startActivity(intent)
-            finish()
-        }
-
-      else if (!sp.contains("acitivity") || sp.getString("activity", "p").equals("OverviewActivity")) {
-            spEdit.putString("activity", "OverviewActivity")
-            spEdit.commit()
-
-           // sp.getString("activity", "")?.let {
-             //   Log.e("Activity", "")
-
-                var st:String = sp.getString("activity", "")!!
-
-                val intent = Intent(this@MainActivity, Class.forName("com.example.alphabet14.${st}").kotlin.java)
-                //var y =Intent()
-
-                startActivity(intent)
-                finish()
-
-            };
-
-
-            //  Log.e("Daniel", "Yeah")
-            super.onCreate(savedInstanceState)
-            // setContentView(R.layout.activity_main)
-        }
-
-    }
-
-
-/*import android.Manifest
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -86,7 +22,7 @@ import java.lang.NullPointerException
 //import sun.net.ext.ExtendedSocketOptions.options
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class OverviewActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var buttonA: Button
     private lateinit var buttonB: Button
@@ -120,35 +56,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var presenter = Presenter()
 
 
-  //  var t1 = storeImgs(applicationContext)
+    //  var t1 = storeImgs(applicationContext)
 
-   // var t1 = storeImgs(applicationContext, resIntArray)
+    // var t1 = storeImgs(applicationContext, resIntArray)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         var t1L = loopResIds1(applicationContext)
-
-
-     //   var t1L = loopResIds(applicationContext)
         t1L.start()
         presenter.getLoopThread(t1L)
+        var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
+        var spEdit: SharedPreferences.Editor = sp.edit()
+
+        spEdit.putString("activity", "OverviewActivity")
+        spEdit.commit()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         buttonCreate()
-      //  t1L.join()
-       // t1.start()
+        //  t1L.join()
+        // t1.start()
         //t1.join()
 
         //resIntArray = loopRes()
 
-       // save(applicationContext)
+        // save(applicationContext)
 
-  //      var t1 = storeImgs(applicationContext)
-     //   t1.start()
+        //      var t1 = storeImgs(applicationContext)
+        //   t1.start()
 //
-      //  switchActivity()
+        //  switchActivity()
     }
 
     fun switchActivity(){
@@ -157,34 +95,34 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         buttonA.setOnClickListener{
             val intent = Intent(this,LetterActivity::class.java)
-          //  intent.putExtra("SHOW_WELCOME", true)
+            //  intent.putExtra("SHOW_WELCOME", true)
             startActivity(intent)
-          //  finish()
+            //  finish()
         }
     }
 
     // Function to check and request permission.
     private fun checkPermission() {
-        // if (ContextCompat.checkSelfPermission(this@MainActivity, permission) == PackageManager.PERMISSION_DENIED) {
+        // if (ContextCompat.checkSelfPermission(this@OverviewActivity, permission) == PackageManager.PERMISSION_DENIED) {
         if (ContextCompat.checkSelfPermission(
-                this@MainActivity,
+                this@OverviewActivity,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_DENIED
         ) {
             // Requesting the permission
-            // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(permission), requestCode)
+            // ActivityCompat.requestPermissions(this@OverviewActivity, arrayOf(permission), requestCode)
             ActivityCompat.requestPermissions(
-                this@MainActivity,
+                this@OverviewActivity,
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 1
             )
         } else {
-            Toast.makeText(this@MainActivity, "Permission already granted", Toast.LENGTH_SHORT)
+            Toast.makeText(this@OverviewActivity, "Permission already granted", Toast.LENGTH_SHORT)
                 .show()
         }
 
-        // ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
-        //if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+        // ActivityCompat.requestPermissions(this@OverviewActivity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        //if (ContextCompat.checkSelfPermission(this@OverviewActivity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
 
     }
 
@@ -194,13 +132,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     {// t1.join()
         presenter.setImageArr(applicationContext)
 
-      //  t1.join()
+        //  t1.join()
 
         when ( view!!.id)
         {
             R.id.buttonA->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
                 //presenter.setIntent(intent)
                 //intent.putExtra("array", resIntArray)
                 //intent.putExtra("index", 0)
@@ -210,99 +148,99 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.buttonB->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
                 //presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 1)
+                // intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 1)
                 presenter.setImageIn(1)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonC->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
                 //presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 2)
+                // intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 2)
                 presenter.setImageIn(2)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonD->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-               // presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 3)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                // presenter.setIntent(intent)
+                // intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 3)
                 presenter.setImageIn(3)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonE->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-              //  presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 4)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //  presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 4)
                 presenter.setImageIn(4)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonF->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-              //  presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 5)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //  presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 5)
                 presenter.setImageIn(5)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonG->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-              //  presenter.setIntent(intent)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //  presenter.setIntent(intent)
                 //intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 6)
+                // intent.putExtra("index", 6)
                 presenter.setImageIn(6)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonH->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-               // presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 7)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                // presenter.setIntent(intent)
+                // intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 7)
                 presenter.setImageIn(7)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonI->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-              //  presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 8)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //  presenter.setIntent(intent)
+                // intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 8)
                 presenter.setImageIn(8)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonJ->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 9)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 9)
                 presenter.setImageIn(9)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonK->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
                 //intent.putExtra("index", 10)
                 presenter.setImageIn(10)
                 startActivity(intent)
@@ -310,79 +248,79 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.buttonL->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-             //   presenter.setIntent(intent)
-               // intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 11)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //   presenter.setIntent(intent)
+                // intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 11)
                 presenter.setImageIn(11)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonM->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-             //   presenter.setIntent(intent)
-             //   intent.putExtra("array", resIntArray)
-             //   intent.putExtra("index", 12)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //   presenter.setIntent(intent)
+                //   intent.putExtra("array", resIntArray)
+                //   intent.putExtra("index", 12)
                 presenter.setImageIn(12)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonN->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-             //   presenter.setIntent(intent)
-             //   intent.putExtra("array", resIntArray)
-             //   intent.putExtra("index", 13)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //   presenter.setIntent(intent)
+                //   intent.putExtra("array", resIntArray)
+                //   intent.putExtra("index", 13)
                 presenter.setImageIn(13)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonO->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-          //      presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-            //    intent.putExtra("index", 14)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //      presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //    intent.putExtra("index", 14)
                 presenter.setImageIn(14)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonP->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-           //     presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-            //    intent.putExtra("index", 15)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //     presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //    intent.putExtra("index", 15)
                 presenter.setImageIn(15)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonQ->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-             //   presenter.setIntent(intent)
-             //   intent.putExtra("array", resIntArray)
-             //   intent.putExtra("index", 16)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //   presenter.setIntent(intent)
+                //   intent.putExtra("array", resIntArray)
+                //   intent.putExtra("index", 16)
                 presenter.setImageIn(16)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonR->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-            //    intent.putExtra("index", 17)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //    intent.putExtra("index", 17)
                 presenter.setImageIn(17)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonS->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
                 //intent.putExtra("index", 18)
                 presenter.setImageIn(18)
                 startActivity(intent)
@@ -390,39 +328,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.buttonT->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-          //      presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 19)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //      presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 19)
                 presenter.setImageIn(19)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonU->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-            //    intent.putExtra("index", 20)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //    intent.putExtra("index", 20)
                 presenter.setImageIn(20)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonV->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-             //   presenter.setIntent(intent)
-             //   intent.putExtra("array", resIntArray)
-             //   intent.putExtra("index", 21)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //   presenter.setIntent(intent)
+                //   intent.putExtra("array", resIntArray)
+                //   intent.putExtra("index", 21)
                 presenter.setImageIn(21)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonW->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-            //    presenter.setIntent(intent)
-              //  intent.putExtra("array", resIntArray)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //    presenter.setIntent(intent)
+                //  intent.putExtra("array", resIntArray)
                 //intent.putExtra("index", 22)
                 presenter.setImageIn(22)
                 startActivity(intent)
@@ -430,30 +368,30 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.buttonX->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-           //     presenter.setIntent(intent)
-             //   intent.putExtra("array", resIntArray)
-               // intent.putExtra("index", 23)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //     presenter.setIntent(intent)
+                //   intent.putExtra("array", resIntArray)
+                // intent.putExtra("index", 23)
                 presenter.setImageIn(23)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonY->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-          //      presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 24)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //      presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 24)
                 presenter.setImageIn(24)
                 startActivity(intent)
                 finish()
             }
             R.id.buttonZ->
             {
-                val intent = Intent(this@MainActivity,LetterActivity::class.java)
-          //      presenter.setIntent(intent)
-            //    intent.putExtra("array", resIntArray)
-              //  intent.putExtra("index", 25)
+                val intent = Intent(this@OverviewActivity,LetterActivity::class.java)
+                //      presenter.setIntent(intent)
+                //    intent.putExtra("array", resIntArray)
+                //  intent.putExtra("index", 25)
                 presenter.setImageIn(25)
                 startActivity(intent)
                 finish()
@@ -502,7 +440,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val savPath = File(dirPath, "/alphabet")
 
             if(!savPath.exists()){
-            savPath.mkdir()}
+                savPath.mkdir()}
 
             val outFile = File(savPath, "slide"+count+".gif")
             count++
@@ -579,4 +517,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-}*/
+}

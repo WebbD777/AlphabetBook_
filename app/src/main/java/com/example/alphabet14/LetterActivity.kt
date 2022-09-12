@@ -1,6 +1,8 @@
 package com.example.alphabet14
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -27,6 +29,8 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
     var presenter = Presenter()
 
+
+
     override fun onClick(view: View?) {
         when (view!!.id) {
 
@@ -48,7 +52,7 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
                 presenter.setLetterImageView(imageView)
             }
             R.id.buttonOver -> {
-                val intent = Intent(this@LetterActivity,MainActivity::class.java)
+                val intent = Intent(this@LetterActivity,OverviewActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -98,6 +102,12 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
+        var spEdit: SharedPreferences.Editor = sp.edit()
+
+        spEdit.putString("activity", "LetterActivity")
+      //  spEdit.putInt("letter",Model.getIndex())
+        spEdit.commit()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter)
        // val resInt = intent.getIntExtra("letter", 0)
