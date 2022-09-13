@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
 import kotlin.properties.Delegates
@@ -21,6 +23,7 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var buttonOver: Button
     private lateinit var buttonNext: Button
     private lateinit var buttonPrevious: Button
+   // private lateinit var toolbar: Toolbar
 
     private lateinit var resArr1: IntArray
     private var resInt1 :Int = 0
@@ -102,6 +105,7 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+       // toolbar.setBackgroundColor(6)
         var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
         var spEdit: SharedPreferences.Editor = sp.edit()
 
@@ -152,6 +156,7 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
         buttonOver =  findViewById(R.id.buttonOver)
         buttonNext =  findViewById(R.id.buttonNext)
         buttonPrevious =  findViewById(R.id.buttonPrevious)
+//        toolbar = findViewById(R.id.toolbar4)
 
         buttonA.setOnClickListener(this)
         buttonZ.setOnClickListener(this)
