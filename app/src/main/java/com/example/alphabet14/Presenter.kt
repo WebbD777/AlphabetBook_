@@ -4,13 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
+import kotlin.coroutines.CoroutineContext
 
 
 class Presenter {
@@ -31,6 +35,7 @@ class Presenter {
     }
 
     fun setLetterImageView(imageView: ImageView){
+       // val scope: CoroutineScope = CoroutineScope)
      //   var slideNum:Int = Model.getIndex()+1
      //   var biy: Bitmap = BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide"+slideNum+".gif")
      //   imageView.setImageBitmap(biy)
@@ -77,6 +82,9 @@ class Presenter {
 }
 
 class loadThread:Thread{
+/*width="334dp"
+height="393dp"
+* */
 
     lateinit var imgView:ImageView
 
@@ -87,10 +95,15 @@ class loadThread:Thread{
 
     override fun run() {
         try {
+            var options = BitmapFactory.Options()
+            options.inSampleSize=2
+
             var slideNum: Int = Model.getIndex() + 1
-            var biy: Bitmap =
-                BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide" + slideNum + ".gif")
-            imgView.setImageBitmap(biy)
+            var bitSampled=
+                BitmapFactory.decodeFile("/storage/emulated/0/DCIM/alphabet/slide" + slideNum + ".gif", options)
+         //   var bitReSized : Bitmap = Bitmap.createBitmap(biy,0,0,334,393,matrix, false)
+           // bitReSized.recycle()
+            imgView.setImageBitmap(bitSampled)
         }
         catch (e:Exception){
             when(e){
