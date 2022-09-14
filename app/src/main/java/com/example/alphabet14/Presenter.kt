@@ -110,6 +110,9 @@ height="393dp"
                 is FileNotFoundException ->{
                     Log.e("Exception", "File Not Found")
                 }
+                is OutOfMemoryError ->{
+                    Log.e("Exception", "Out of Memory")
+                }
             }
         }
     }
