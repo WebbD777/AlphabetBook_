@@ -47,9 +47,10 @@ class OverviewActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var t1L = loopResIds1(applicationContext)
+        var t1L = loopResIds1(applicationContext) // Starts thread to load images to storage in background to prevent main thread from stalling
         t1L.start()
-        presenter.getLoopThread(t1L)
+        presenter.getLoopThread(t1L) // pases thread to Presenter class
+
         var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
         var spEdit: SharedPreferences.Editor = sp.edit()
 
@@ -64,7 +65,8 @@ class OverviewActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onClick(view: View?)
-    {
+    { /* Switches to letter activity and loads image from storage correspomding to button pressed and saves action to shared preference
+    */
         var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
         var spEdit: SharedPreferences.Editor = sp.edit()
 
@@ -74,7 +76,7 @@ class OverviewActivity : AppCompatActivity(), View.OnClickListener {
         {
             R.id.buttonA->
             {
-                spEdit.putInt("letter", 0)
+                spEdit.putInt("letter", 0) // saves letter preference
                 spEdit.commit()
 
                 val intent = Intent(this@OverviewActivity,LetterActivity::class.java)

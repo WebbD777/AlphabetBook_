@@ -1,34 +1,30 @@
 package com.example.alphabet14
 
+/* Name: Dylan Webb
+   Student Number: WBBDYL001
+   Assignment: MDD1
+* */
+
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 
 class Model{
+    /*Model class saves data to be manipulated by Presenter class
+    * */
 
     companion object{
         private lateinit var rIdArray: IntArray
         private var rIndext: Int = 0
         private var count: Boolean = false
-        private lateinit var intent: Intent
-        private lateinit var context: Context
+      //  private lateinit var intent: Intent
+       // private lateinit var context: Context
         private var storagePath = "/storage/emulated/0/DCIM"
 
         fun getPath():String{
             return storagePath
         }
 
-        fun setIntent(intent: Intent){
-            this.intent=intent
-        }
-
-        fun setContect(context: Context){
-            this.context=context
-        }
-
-        fun getIntent():Intent{
-            return intent
-        }
 
         fun getIndex():Int{
             return rIndext
@@ -36,10 +32,6 @@ class Model{
 
         fun setIndext(int:Int){
             rIndext=int
-        }
-
-        fun getArr(): IntArray {
-            return rIdArray
         }
 
         fun setArr(intArray: IntArray){
@@ -61,7 +53,6 @@ class Model{
             for (i in 1..26){
                 if (i < 10) {
                     var draw: String = "slide0"+i
-                    //var draw: String = "drawable/slide0.gif"
 
                     var id:Int = context.resources.getIdentifier(draw, "drawable", context.packageName)
                     if (i==1){

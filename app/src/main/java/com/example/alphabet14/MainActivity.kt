@@ -12,16 +12,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    /*
+    Class is used to re-create activities based on past usage
+    * */
 
     var presenter = Presenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
 
+        var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
 
         var spEdit: SharedPreferences.Editor = sp.edit()
 
         if (sp.getString("activity", "p").equals("LetterActivity")){
+            /* Uses SharedPreferences Checks if previous usage was destroyed on letter view and recreates it
+        */
             var st:String = sp.getString("activity", "p")!!
 
             val intent = Intent(this@MainActivity,Class.forName("com.example.alphabet14.${st}").kotlin.java)
@@ -32,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         }
 
       else if (!sp.contains("acitivity") || sp.getString("activity", "p").equals("OverviewActivity")) {
+            /* Uses SharedPreferences Checks if previous usage was destroyed on Overview view and recreates it
+       */
             spEdit.putString("activity", "OverviewActivity")
             spEdit.commit()
 

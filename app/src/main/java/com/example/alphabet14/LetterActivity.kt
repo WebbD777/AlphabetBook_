@@ -28,6 +28,8 @@ class LetterActivity : AppCompatActivity(), View.OnClickListener{
 
 
     override fun onClick(view: View?) {
+        /*Method detects button pressed and gives info to Presenter class to handle
+        * */
         var sp: SharedPreferences = getSharedPreferences("myActivity", Context.MODE_PRIVATE)
         var spEdit: SharedPreferences.Editor = sp.edit()
 
